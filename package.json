@@ -10,15 +10,48 @@
 		"Other"
 	],
 	"activationEvents": [
-        "onCommand:timo-vscode-plugin-demo.helloWorld"
+    "*"
 	],
-	"main": "./extension.js",
+	"main": "./src/index",
 	"contributes": {
-		"commands": [{
-            "command": "timo-vscode-plugin-demo.helloWorld",
-            "title": "Hello World"
-
-		}]
+		"commands": [
+			{
+				"command": "extension.sayHello",
+				"title": "timo_vscode-sayHello"
+			}, 
+			{
+				"command": "extension.getCurrentFilePath",
+				"title": "timo_vscode-获取文件目录uri"
+			}
+		],
+		"keybindings": [
+			{
+					"command": "extension.sayHello",
+					"key": "ctrl+f10",
+					"mac": "cmd+f10",
+					"when": "editorTextFocus"
+			}
+		],
+		"menus": {
+			"editor/context": [
+					{
+							"when": "editorFocus",
+							"command": "extension.sayHello",
+							"group": "navigation"
+					},
+					{
+						"when": "editorFocus",
+						"command": "extension.getCurrentFilePath",
+						"group": "navigation"
+					}
+			],
+			"explorer/context": [
+				{
+						"command": "extension.getCurrentFilePath",
+						"group": "navigation"
+				}
+			]	
+		}
 	},
 	"scripts": {
 		"lint": "eslint .",
